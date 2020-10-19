@@ -8,7 +8,7 @@ use App\News;
 
 use App\History; #lalavel_18追記
 use Carbon\carbon; #lalavel_18追記
-use Strage; //19追加
+use Storage; //19追加
 
 
 //以下を追記することでNews Modelが扱えるようになる(lalavel_15)
@@ -32,7 +32,7 @@ class NewsController extends Controller
 
       // フォームから画像が送信されてきたら、保存して、$news->image_path に画像のパスを保存する
       if (isset($form['image'])) {
-        $path = Strage::disk('s3')->putFile('/',$form['image'],'public');
+        $path = Storage::disk('s3')->putFile('/',$form['image'],'public');
         $news->image_path = Storage::disk('s3')->url($path);
       } else {
           $news->image_path = null;
